@@ -7,6 +7,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
+import plotly.express as px
 
 
 #Read csv file
@@ -18,58 +19,55 @@ df=pd.read_excel(r'C:\Users\saurabh_kulkarni\Desktop\Litepoint DRT.xlsx',sheet_n
 ###############################################################################
 
 #Define CSS style
-#external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-#Define app
-#app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-app=dash.Dash()
-
-#Define colors 
+#Define colors dictionary for background and text colors
 colors = {
-    'background': '#ffffff',
+    'background': '#111111',
     'text': '#000080'
 }
 
-#Define how the dashboard will look like
+#Define app
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-
-###Older code
-'''
-app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
-    html.H1(
-        children='Litepoint Process & Quality Dashboard',
-        style={
-            'textAlign': 'center',
-            'color': colors['text']
-        }
-    ),
-
-    dcc.Graph(
-        id='yield_by_process',
-        figure={
-            'data': [
-                {'x':df['Process'],'y':df.Yield,'type':'line','name':'Yield'}
-            ],
-            'layout': {
-                'title':{"text":'Yield by Process'},
-                'yaxis_title':{"text":"Process"},
-                'plot_bgcolor': colors['background'],
-                'paper_bgcolor': colors['background'],
-                'font': {
-                    'color': colors['text']
-                }
-            }
-        }
-    )
-])
-'''
-
-app.layout=html.Div([
+#Layout of app
+app.layout=html.Div(children=[
+        html.H1(children='Process & Yield Dashboard', style={'textAlign':'center','color':colors['text']}),
+        
         dcc.Graph(
                 id='yield_by_process',
-                figure= go.Figure([go.Bar(x=df['Process'],y=df['Yield'])])                                
+                figure={
+                        'data':[{'type':'line','x':df.Process,'y':df.Yield,'text':df.Yield,'textposition':'auto'}],
+                        'layout':{
+                                'yaxis':{       
+                                        'range':[0,100]
+                                        },
+                                'title':{
+                                        'text':'Yield by Process',
+                                        'font':{
+                                                'color':colors['text']
+                                                }
+                                        }
+                                }
+                        }
+                ),
+        
+        dcc.Graph(
+                id='volume_by_process',
+                figure={
+                        'data':[{'type':'bar','x':df.Process,'y':df.Tested,'text':df.Tested,'textposition':'auto'}],
+                        'layout':{
+                                'title':{
+                                        'text':'Volume by Process',
+                                        'font':{
+                                                'color':colors['text']
+                                                }
+                                        }
+                                }
+                        }
                 )
-        ])
+        ]
+)
 
 if __name__ == '__main__':
     app.run_server(debug=True)
