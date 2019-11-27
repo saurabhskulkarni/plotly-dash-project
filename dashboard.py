@@ -33,13 +33,13 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 #Layout of app
 app.layout=html.Div(children=[
         html.H1(children='Process & Yield Dashboard', style={'textAlign':'center','color':colors['text']}),
-        
+
         dcc.Graph(
                 id='yield_by_process',
                 figure={
-                        'data':[{'type':'line','x':df.Process,'y':df.Yield,'text':df.Yield,'textposition':'auto'}],
+                        'data':[{'type':'scatter','mode':'lines+markers+text','x':df.Process,'y':df.Yield,'text':df.Yield,'textposition':'bottom center','textfont':{'color':colors['text']}}],
                         'layout':{
-                                'yaxis':{       
+                                'yaxis':{
                                         'range':[0,100]
                                         },
                                 'title':{
@@ -51,11 +51,11 @@ app.layout=html.Div(children=[
                                 }
                         }
                 ),
-        
+
         dcc.Graph(
                 id='volume_by_process',
                 figure={
-                        'data':[{'type':'bar','x':df.Process,'y':df.Tested,'text':df.Tested,'textposition':'auto'}],
+                        'data':[{'type':'bar','x':df.Process,'y':df.Tested,'text':df.Tested,'textposition':'auto','textfont':{'color':colors['text']}}],
                         'layout':{
                                 'title':{
                                         'text':'Volume by Process',
