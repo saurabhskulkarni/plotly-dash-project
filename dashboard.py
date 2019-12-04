@@ -12,7 +12,9 @@ from plotly.subplots import make_subplots
 
 
 #Read csv file
-df=pd.read_excel(r'C:\Users\saurabh_kulkarni\Desktop\Litepoint DRT.xlsx',sheet_name='Yield')
+df_yield=pd.read_excel(r'C:\Users\saurabh_kulkarni\Google Drive\Plotly Dash Project\SampleCSV.xlsx',sheet_name='Yield')
+df_aoibotvol=pd.read_excel(r'C:\Users\saurabh_kulkarni\Google Drive\Plotly Dash Project\SampleCSV.xlsx',sheet_name='AOI BOT Volume')
+df_aoitopvol=pd.read_excel(r'C:\Users\saurabh_kulkarni\Google Drive\Plotly Dash Project\SampleCSV.xlsx',sheet_name='AOI Top Volume')
 
 
 ###############################################################################
@@ -28,8 +30,11 @@ colors = {
     'text': '#000080'
 }
 
+# 
 #Define app
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+
 
 #Markdown text for Volume charts
 markdown_text='''
@@ -43,8 +48,8 @@ app.layout=html.Div(children=[
         #Yield chart using scatter, Yield by process chart
         dcc.Graph(
                 id='yield_by_process',
-                figure_yield={
-                        'data':[{'type':'scatter','mode':'lines+markers+text','x':df.Process,'y':df.Yield,'text':df.Yield,'textposition':'bottom center','textfont':{'color':colors['text']}}],
+                figure={
+                        'data':[{'type':'scatter','mode':'lines+markers+text','x':df_yield.Process,'y':df_yield.Yield,'text':df_yield.Yield,'textposition':'bottom center','textfont':{'color':colors['text']}}],
                         'layout':{
                                 'yaxis':{
                                         'range':[0,100]
@@ -61,8 +66,8 @@ app.layout=html.Div(children=[
         #Volume by process bar chart
         dcc.Graph(
                 id='volume_by_process',
-                figure_volume={
-                        'data':[{'type':'bar','x':df.Process,'y':df.Tested,'text':df.Tested,'textposition':'auto','textfont':{'color':colors['text']}}],
+                figure={
+                        'data':[{'type':'bar','x':df_yield.Process,'y':df_yield.Tested,'text':df_yield.Tested,'textposition':'auto','textfont':{'color':colors['text']}}],
                         'layout':{
                                 'title':{
                                         'text':'Volume by Process',
