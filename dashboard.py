@@ -12,9 +12,9 @@ from plotly.subplots import make_subplots
 
 
 #Read csv file
-df_yield=pd.read_excel(r'C:\Users\saurabh_kulkarni\Google Drive\Plotly Dash Project\SampleCSV.xlsx',sheet_name='Yield')
-df_aoibotvol=pd.read_excel(r'C:\Users\saurabh_kulkarni\Google Drive\Plotly Dash Project\SampleCSV.xlsx',sheet_name='AOI BOT Volume')
-df_aoitopvol=pd.read_excel(r'C:\Users\saurabh_kulkarni\Google Drive\Plotly Dash Project\SampleCSV.xlsx',sheet_name='AOI Top Volume')
+df_yield=pd.read_excel(r'/home/saurabh/Documents/plotly-project/plotly-dash-project/SampleCSV.xlsx',sheet_name='Yield')
+df_aoibotvol=pd.read_excel(r'/home/saurabh/Documents/plotly-project/plotly-dash-project/SampleCSV.xlsx',sheet_name='AOI BOT Volume')
+df_aoitopvol=pd.read_excel(r'/home/saurabh/Documents/plotly-project/plotly-dash-project/SampleCSV.xlsx',sheet_name='AOI Top Volume')
 
 
 ###############################################################################

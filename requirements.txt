@@ -1,7 +1,8 @@
-numpy==1.17.4
-pandas==0.25.3
-glob2==0.7
-dash==1.6.1
-dash-core-components==1.5.1
-dash-html-components==1.0.2
-plotly==4.3.0
+numpy
+pandas
+glob2
+dash
+dash-core-components
+dash-html-components
+plotly
+gunicorn
